@@ -830,6 +830,88 @@ header h1 {
     color: var(--accent-color);
     font-size: 0.9em;
 }
+/* --- Contact Us Section (About Page) --- */
+.contact-us-section {
+    /* Uses .section-padding and .bg-neutral already defined */
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr; /* Details take less space than map */
+    gap: 40px;
+    align-items: flex-start; /* Align items to the top of their grid cell */
+}
+
+.contact-details h3,
+.map-container h3 {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.contact-details h3::after,
+.map-container h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background-color: var(--secondary-color);
+}
+
+.contact-details p {
+    font-size: 1.05rem;
+    margin-bottom: 15px;
+    line-height: 1.8;
+    display: flex; /* For icon alignment */
+    align-items: flex-start; /* Align icon with first line of text */
+}
+
+.contact-details p i {
+    color: var(--primary-color);
+    margin-right: 12px;
+    font-size: 1.2rem;
+    width: 20px; /* Fixed width for icons for consistent alignment */
+    text-align: center;
+    margin-top: 4px; /* Slight adjustment for vertical alignment */
+}
+.contact-details h4 {
+    font-size: 1.2rem;
+    color: var(--heading-color);
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+
+
+.map-container iframe {
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--border-color); /* Optional border around map */
+}
+
+/* Responsive adjustments for Contact Us Section */
+@media (max-width: 992px) {
+    .contact-grid {
+        grid-template-columns: 1fr; /* Stack on smaller screens */
+        gap: 30px;
+    }
+    .map-container {
+        margin-top: 30px; /* Add some space when stacked */
+    }
+    .contact-details h3,
+    .map-container h3 {
+        font-size: 1.6rem; /* Slightly smaller headings */
+    }
+}
+
+@media (max-width: 768px) {
+    .contact-details p i {
+        font-size: 1.1rem;
+    }
+}
 
 /* --- Footer --- */
 footer {
