@@ -1,0 +1,36 @@
+springfield-academy/
+├── ... (other files like index.html)
+├── data/
+│   └── gallery.json  (with the content above)
+│   └── notices.json
+│   └── results.json
+├── images/
+│   ├── logo.png
+│   ├── hero-bg.jpg
+│   ├── favicon.ico
+│   ├── gallery_placeholder_default.jpg  <-- The fallback image
+│   ├── gallery/  <-- THIS IS THE NEW SUBDIRECTORY
+│   │   ├── annual_day_1.jpg
+│   │   ├── annual_day_2.jpg
+│   │   ├── annual_day_3.jpg
+│   │   ├── campus_1.jpg
+│   │   ├── campus_2.jpg
+│   │   ├── campus_3.jpg
+│   │   ├── campus_4.jpg
+│   │   ├── graduation_1.jpg
+│   │   ├── graduation_2.jpg
+│   │   ├── sports_day_1.jpg
+│   │   ├── sports_day_2.jpg
+│   │   ├── sports_day_3.jpg
+│   │   ├── science_fair_1.jpg
+│   │   ├── science_fair_2.jpg
+│   │   ├── classroom_1.jpg
+│   │   ├── classroom_2.jpg
+│   │   ├── classroom_3.jpg
+│   │   └── ... (and any other images you use)
+│   └── notice/
+│       └── ...
+├── css/
+│   └── style.css
+└── js/
+    └── script.js

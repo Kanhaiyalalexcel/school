@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results - Springfield Academy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="index.html" class="logo-link">
+                <img src="images/logo.png" alt="Springfield Academy Logo" class="logo-img">
+                <h1>Springfield Academy</h1>
+            </a>
+            <nav>
+                <button class="nav-toggle" aria-label="toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="results.html" class="active">Results</a></li>
+                    <li><a href="notice.html">Notice Board</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-title-section">
+            <div class="container">
+                <h2>Examination Results</h2>
+                <p>Check your academic performance.</p>
+            </div>
+        </section>
+
+        <section class="results-section section-padding">
+            <div class="container">
+                <div class="results-filter">
+                    <div class="form-group">
+                        <label for="class-select">Select Class:</label>
+                        <select id="class-select" class="form-control">
+                            <option value="">-- Select Class --</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="test-select">Select Test/Exam:</label>
+                        <select id="test-select" class="form-control" disabled>
+                            <option value="">-- Select Test --</option>
+                        </select>
+                    </div>
+                    <button id="view-results-btn" class="btn btn-primary" disabled>View Results</button>
+                </div>
+
+                <div id="results-table-container" class="table-responsive">
+                    <!-- Results table will be rendered here by JS -->
+                    <p class="placeholder-text">Please select a class and test to view results.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© <span id="currentYear"></span> Springfield Academy. All Rights Reserved.</p>
+            <div class="social-links">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

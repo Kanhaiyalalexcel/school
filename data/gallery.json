@@ -1,0 +1,55 @@
+[
+  {
+    "id": 6,
+    "title": "Annual Day Celebration",
+    "image" :[
+      "images/gallery/1.jpg",
+      "images/gallery/2.jpg",
+      "images/gallery/1.jpg"
+    ]
+  },
+  {
+    "id": 5,
+    "title": "Our Beautiful Campus",
+    "image" :[
+      "images/gallery/1.jpg",
+      "images/gallery/1.jpg",
+      "images/gallery/2.jpg",
+      "images/gallery/1.jpg"
+    ]
+  },
+  {
+    "id": 4,
+    "title": "Graduation Ceremony",
+    "image" :[
+      "images/gallery/1.jpg",
+      "images/gallery/2.jpg"
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Sports Day Highlights",
+    "image" :[
+      "images/gallery/2.jpg",
+      "images/gallery/2.jpg",
+      "images/gallery/1.jpg"
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Science Exhibition",
+    "image" :[
+      "images/gallery/1.jpg",
+      "images/gallery/1.jpg"
+    ]
+  },
+  {
+    "id": 1,
+    "title": "Classroom Activities",
+    "image" :[
+      "images/gallery/1.jpg",
+      "images/gallery/2.jpg",
+      "images/gallery/1.jpg"
+    ]
+  }
+]
