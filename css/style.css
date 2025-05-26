@@ -970,3 +970,120 @@ footer p {
     .gallery-item img { height: 220px; }
 
 }
+/* --- Highlights Section Link Wrapper --- */
+.highlight-item-link {
+    text-decoration: none; /* Remove underline from link */
+    color: inherit; /* Inherit text color from parent */
+    display: block; /* Make the link a block to contain the card */
+    border-radius: var(--border-radius-lg); /* Match card's border radius if any */
+    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+}
+.highlight-item-link:hover .highlight-item { /* Apply hover styles to the card inside link */
+    transform: translateY(-8px);
+    box-shadow: var(--card-hover-shadow);
+}
+/* Adjust original .highlight-item hover if it was standalone */
+.highlight-item:hover { /* If not wrapped in a link */
+    transform: translateY(-8px);
+    box-shadow: var(--card-hover-shadow);
+}
+
+
+/* --- Educators Page --- */
+.educators-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.educator-card {
+    background-color: var(--bg-color);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--card-shadow);
+    overflow: hidden; /* Important for photo wrapper's border radius */
+    display: flex;
+    flex-direction: column;
+    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+    border: 1px solid var(--border-color);
+}
+
+.educator-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--card-hover-shadow);
+}
+
+.educator-photo-wrapper {
+    width: 100%;
+    padding-top: 100%; /* This creates the 1:1 aspect ratio (height is 100% of width) */
+    position: relative; /* For absolute positioning of the image inside */
+    background-color: var(--light-bg-color); /* Fallback bg for image area */
+}
+
+.educator-photo-wrapper img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Cover the area, cropping if necessary */
+    object-position: center top; /* Prioritize top of image if cropped */
+    border-radius: 0; /* Image itself doesn't need radius if wrapper has overflow:hidden */
+}
+
+.educator-info {
+    padding: 20px 25px;
+    text-align: center; /* Center align text */
+}
+
+.educator-name {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+}
+
+.educator-subject {
+    font-weight: 600;
+    color: var(--secondary-color);
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+
+.educator-degree {
+    font-size: 0.9rem;
+    color: var(--text-color);
+    margin-bottom: 15px;
+    font-style: italic;
+}
+.educator-quote {
+    font-size: 0.95rem;
+    color: #555;
+    font-family: var(--font-secondary); /* Lora for quotes */
+    font-style: italic;
+    line-height: 1.5;
+    padding-top: 10px;
+    border-top: 1px dashed var(--border-color);
+    margin-top: 10px;
+}
+
+
+/* Responsive adjustments for educators if needed */
+@media (max-width: 992px) {
+    .educators-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    /* ... */
+     .educators-grid {
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); /* Further adjust for smaller screens */
+    }
+    .educator-name { font-size: 1.3rem; }
+}
+
+@media (max-width: 480px) {
+    /* ... */
+    .educators-grid {
+        grid-template-columns: 1fr; /* Single column on very small screens */
+    }
+}

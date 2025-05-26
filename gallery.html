@@ -38,32 +38,32 @@
             </div>
         </section>
 
-        <section class="gallery-grid section-padding">
+       <section class="gallery-grid section-padding">
             <div class="container">
                 <div id="image-gallery-container" class="image-gallery">
                     <!-- Gallery albums will be loaded here by JS -->
                     <p class="loading-text">Loading gallery...</p>
                 </div>
 
-                <!-- Lightbox Structure (remains the same) -->
+                <!-- >>>>> LIGHTBOX STRUCTURE - CHECK THIS CAREFULLY <<<<< -->
                 <div id="lightbox" class="lightbox">
                     <span class="close-lightbox">×</span>
-                    <img class="lightbox-content" id="lightbox-img">
+                    <button class="lightbox-nav prev" aria-label="Previous image" title="Previous image"><</button>
+                    <div class="lightbox-image-container">
+                        <img class="lightbox-content" id="lightbox-img" alt="Gallery image">
+                    </div>
+                    <button class="lightbox-nav next" aria-label="Next image" title="Next image">></button>
                     <div id="lightbox-caption"></div>
+                    <div id="lightbox-counter"></div>
                 </div>
+                <!-- >>>>> END OF LIGHTBOX STRUCTURE <<<<< -->
+
             </div>
         </section>
     </main>
 
     <footer>
-        <div class="container">
-            <p>© <span id="currentYear"></span> Springfield Academy. Excellence in Education. All Rights Reserved.</p>
-            <div class="social-links">
-                <a href="#" aria-label="Facebook" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" aria-label="Twitter" title="Twitter"><i class="fab fa-twitter"></i></a>
-                <a href="#" aria-label="Instagram" title="Instagram"><i class="fab fa-instagram"></i></a>
-            </div>
-        </div>
+        <!-- ... footer content ... -->
     </footer>
 
     <script src="js/script.js"></script>

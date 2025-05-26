@@ -18,13 +18,16 @@ document.addEventListener('DOMContentLoaded', () => {
         links.forEach(link => {
             link.classList.remove('active');
             let linkHref = link.getAttribute('href').split("/").pop();
-            if (linkHref === '' && currentPath === 'index.html') linkHref = 'index.html';
-            if (linkHref === currentPath) {
+            
+            // Handle index.html being the root path
+            if (currentPath === 'index.html' && (linkHref === '' || linkHref === 'index.html')) {
+                link.classList.add('active');
+            } else if (linkHref === currentPath) {
                 link.classList.add('active');
             }
         });
     };
-    setActiveLink();
+    setActiveLink(); // Call it to set active link
 
     const currentYearSpan = document.getElementById('currentYear');
     if (currentYearSpan) {
@@ -46,6 +49,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (currentPath === 'gallery.html') {
         loadGalleryData();
+    }
+
+    if (currentPath === 'educators.html') { // Add check for the new page
+        // Any specific JS for educators page can go here in the future
+        // For now, just ensuring nav highlighting works if link is in main nav
+        // console.log("Educators page loaded");
     }
 });
 
@@ -223,17 +232,17 @@ function renderResultsTable(studentResults, container) {
 }
 
 // --- Gallery Page Functions ---
-let originalGalleryData = []; // Store all fetched albums globally
+let originalGalleryData = []; 
 
 async function fetchGalleryData() {
     try {
         const response = await fetch('data/gallery.json');
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-        originalGalleryData = await response.json(); // Store fetched data
+        originalGalleryData = await response.json(); 
         return originalGalleryData;
     } catch (error) {
         console.error("Could not fetch gallery data:", error);
-        originalGalleryData = []; // Reset on error
+        originalGalleryData = []; 
         return [];
     }
 }
@@ -243,21 +252,19 @@ function displayGalleryAlbums(albumsToDisplay, containerElement) {
         console.error("Gallery container element not found.");
         return;
     }
-    // The albumsToDisplay here is originalGalleryData, already sorted if needed by fetchGalleryData or loadGalleryData
-    const sortedAlbums = albumsToDisplay.sort((a,b) => b.id - a.id); // Ensure sorting if not done elsewhere
+    const sortedAlbumsForDisplay = [...albumsToDisplay].sort((a, b) => b.id - a.id); 
 
-    if (sortedAlbums.length === 0) {
+    if (sortedAlbumsForDisplay.length === 0) {
         containerElement.innerHTML = '<p class="placeholder-text">No gallery albums to display.</p>';
         return;
     }
 
     let galleryHTML = '';
-    sortedAlbums.forEach((album, albumIndex) => { // albumIndex is the index in the sortedAlbums array
+    sortedAlbumsForDisplay.forEach((album) => { 
         const coverImage = (album.image && album.image.length > 0) ? album.image[0] : 'images/gallery_placeholder_default.jpg';
         
-        // Store albumIndex which corresponds to the index in the currently displayed (and potentially sorted) list
         galleryHTML += `
-            <div class="gallery-item" data-album-index="${albumIndex}">
+            <div class="gallery-item" data-album-id="${album.id}">
                 <img src="${coverImage}" alt="${album.title}">
                 <div class="gallery-item-caption">${album.title}</div>
             </div>
@@ -274,11 +281,11 @@ async function loadGalleryData() {
     }
     galleryContainer.innerHTML = '<p class="loading-text">Loading gallery...</p>';
 
-    const albums = await fetchGalleryData(); // Fetches and stores in originalGalleryData
-    displayGalleryAlbums(albums, galleryContainer); // Display them
+    const albums = await fetchGalleryData(); 
+    displayGalleryAlbums(albums, galleryContainer);
     
     initializeGalleryScrollAnimations();
-    initializeGalleryLightbox(); // No need to pass albums, it will use originalGalleryData
+    initializeGalleryLightbox(); 
 }
 
 function initializeGalleryScrollAnimations() {
@@ -317,42 +324,27 @@ function initializeGalleryLightbox() {
     const closeLightboxBtn = document.querySelector('.close-lightbox');
     const prevBtn = lightbox.querySelector('.lightbox-nav.prev');
     const nextBtn = lightbox.querySelector('.lightbox-nav.next');
-    const galleryItems = document.querySelectorAll('.gallery-item'); // Get items after they are rendered
+    const galleryItems = document.querySelectorAll('.gallery-item');
 
     if (!lightbox || !lightboxImg || !closeLightboxBtn || !prevBtn || !nextBtn) {
-        console.warn("One or more lightbox elements are missing.");
+        // console.warn("One or more lightbox elements are missing. Lightbox functionality disabled.");
         return;
     }
     if (galleryItems.length === 0) {
-        // console.log("No gallery items found to attach lightbox listeners.");
         return;
     }
 
-    function openLightbox(albumIndexFromDOM, imagePathToStartWith) {
-        // albumIndexFromDOM is the index from the sorted list currently on the page
-        // originalGalleryData contains all albums, potentially in a different order if fetchGalleryData sorts it differently
-        // For simplicity, assuming originalGalleryData is the source of truth and its order matches what displayGalleryAlbums used
-        const selectedAlbum = originalGalleryData.sort((a,b) => b.id - a.id)[albumIndexFromDOM];
-
+    function openLightbox(targetAlbumId) {
+        const selectedAlbum = originalGalleryData.find(album => album.id === targetAlbumId);
 
         if (!selectedAlbum || !selectedAlbum.image || selectedAlbum.image.length === 0) {
-            console.error("Selected album data is invalid or has no images for lightbox:", selectedAlbum);
+            console.error("Lightbox: Album not found or has no images. Album ID:", targetAlbumId);
             return;
         }
 
         currentAlbumImagesForLightbox = selectedAlbum.image;
         currentAlbumTitleForLightbox = selectedAlbum.title;
-
-        // Find the index of imagePathToStartWith within the selected album's images
-        let startIndex = currentAlbumImagesForLightbox.findIndex(imgPath => imgPath === imagePathToStartWith);
-        if (startIndex === -1) { // Fallback if exact match fails (e.g. full URL vs relative path)
-            const startFilename = imagePathToStartWith.substring(imagePathToStartWith.lastIndexOf('/') + 1);
-            startIndex = currentAlbumImagesForLightbox.findIndex(imgPath => 
-                imgPath.substring(imgPath.lastIndexOf('/') + 1) === startFilename
-            );
-            if (startIndex === -1) startIndex = 0; // Default to first image if still not found
-        }
-        currentImageIndexInLightbox = startIndex;
+        currentImageIndexInLightbox = 0; 
 
         updateLightboxDisplay();
         lightbox.style.display = 'flex';
@@ -361,13 +353,17 @@ function initializeGalleryLightbox() {
 
     function updateLightboxDisplay() {
         if (currentAlbumImagesForLightbox.length === 0) return;
+        
+        currentImageIndexInLightbox = Math.max(0, Math.min(currentImageIndexInLightbox, currentAlbumImagesForLightbox.length - 1));
+
         lightboxImg.src = currentAlbumImagesForLightbox[currentImageIndexInLightbox];
         lightboxImg.alt = `${currentAlbumTitleForLightbox} - Image ${currentImageIndexInLightbox + 1}`;
         if (lightboxCaption) lightboxCaption.textContent = currentAlbumTitleForLightbox;
         if (lightboxCounter) lightboxCounter.textContent = `${currentImageIndexInLightbox + 1} / ${currentAlbumImagesForLightbox.length}`;
 
-        prevBtn.style.display = currentAlbumImagesForLightbox.length <= 1 ? 'none' : 'block';
-        nextBtn.style.display = currentAlbumImagesForLightbox.length <= 1 ? 'none' : 'block';
+        const isSingleImageAlbum = currentAlbumImagesForLightbox.length <= 1;
+        prevBtn.style.display = isSingleImageAlbum ? 'none' : 'block';
+        nextBtn.style.display = isSingleImageAlbum ? 'none' : 'block';
         
         prevBtn.classList.toggle('disabled', currentImageIndexInLightbox === 0);
         nextBtn.classList.toggle('disabled', currentImageIndexInLightbox === currentAlbumImagesForLightbox.length - 1);
@@ -375,7 +371,7 @@ function initializeGalleryLightbox() {
 
     function closeLightboxAction() {
         lightbox.style.display = 'none';
-        lightboxImg.src = '';
+        lightboxImg.src = ''; 
         document.body.style.overflow = 'auto';
     }
 
@@ -395,29 +391,12 @@ function initializeGalleryLightbox() {
 
     galleryItems.forEach(item => {
         item.addEventListener('click', () => {
-            const albumIndex = parseInt(item.dataset.albumIndex); // Index from the DOM (sorted list)
-            const clickedImageSrc = item.querySelector('img').src; // This will be the full URL
-            
-            // Extract relative path from full URL to match JSON structure
-            // Assumes images are served from the same domain and path starts with 'images/'
-            let relativeClickedImageSrc = '';
-            try {
-                const url = new URL(clickedImageSrc);
-                // Find where 'images/' starts in the pathname
-                const imagesPathIndex = url.pathname.indexOf('/images/');
-                if (imagesPathIndex !== -1) {
-                    relativeClickedImageSrc = url.pathname.substring(imagesPathIndex + 1); // Get 'images/gallery/...'
-                } else {
-                    // Fallback if 'images/' is not in the path (e.g. if served from root and path in JSON is 'gallery/...')
-                    // This part might need adjustment based on actual server setup and JSON paths
-                    relativeClickedImageSrc = clickedImageSrc.substring(clickedImageSrc.lastIndexOf('/') + 1); 
-                    console.warn("Could not reliably determine relative path for clicked image. Using filename only.", clickedImageSrc);
-                }
-            } catch (e) { // If clickedImageSrc is already a relative path (less likely for `img.src`)
-                relativeClickedImageSrc = clickedImageSrc;
+            const albumId = parseInt(item.dataset.albumId); 
+            if (isNaN(albumId)) {
+                console.error("Clicked gallery item has invalid or missing data-album-id.");
+                return;
             }
-            
-            openLightbox(albumIndex, relativeClickedImageSrc);
+            openLightbox(albumId); 
         });
     });
 
@@ -425,13 +404,13 @@ function initializeGalleryLightbox() {
     prevBtn.addEventListener('click', showPrevImage);
     nextBtn.addEventListener('click', showNextImage);
 
-    lightbox.addEventListener('click', (e) => {
+    lightbox.addEventListener('click', (e) => { 
         if (e.target === lightbox) {
             closeLightboxAction();
         }
     });
 
-    document.addEventListener('keydown', (e) => {
+    document.addEventListener('keydown', (e) => { 
         if (lightbox.style.display === 'flex') {
             if (e.key === "Escape") closeLightboxAction();
             if (e.key === "ArrowLeft") showPrevImage();
@@ -442,7 +421,7 @@ function initializeGalleryLightbox() {
     // Basic Touch Swipe Functionality
     let touchstartX = 0;
     let touchendX = 0;
-    const swipeThreshold = 50;
+    const swipeThreshold = 50; 
 
     lightboxImg.addEventListener('touchstart', (e) => {
         touchstartX = e.changedTouches[0].screenX;
@@ -456,9 +435,9 @@ function initializeGalleryLightbox() {
     function handleSwipe() {
         const swipeDistance = touchendX - touchstartX;
         if (Math.abs(swipeDistance) >= swipeThreshold) {
-            if (swipeDistance < 0) { // Swiped left
+            if (swipeDistance < 0) { 
                 showNextImage();
-            } else { // Swiped right
+            } else { 
                 showPrevImage();
             }
         }
