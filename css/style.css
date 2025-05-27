@@ -55,7 +55,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 { font-size: 2.8rem; letter-spacing: -0.5px; }
-h2 { font-size: 2.2rem; } /* General h2, can be overridden by .section-title */
+h2 { font-size: 2.2rem; } 
 h3 { font-size: 1.6rem; }
 h4 { font-size: 1.2rem; }
 
@@ -82,8 +82,8 @@ img {
     border-radius: var(--border-radius-sm);
 }
 
-ul { /* General ul styling, can be overridden */
-    list-style: disc; /* Default list style, page-specific CSS can change this */
+ul { 
+    list-style: disc; 
     padding-left: 20px;
     margin-bottom: 1rem;
 }
@@ -113,7 +113,7 @@ ul li {
     text-align: center;
 }
 
-.section-title { /* For main section titles */
+.section-title { 
     text-align: center;
     margin-bottom: 60px;
     color: var(--primary-color);
@@ -181,14 +181,14 @@ header h1 {
 
 .nav-links {
     display: flex;
-    list-style: none; /* Override general ul for nav */
-    padding-left: 0;   /* Override general ul for nav */
-    margin-bottom: 0;  /* Override general ul for nav */
+    list-style: none; 
+    padding-left: 0;   
+    margin-bottom: 0;  
 }
 
 .nav-links li {
     margin-left: 30px;
-    margin-bottom: 0; /* Override general li for nav */
+    margin-bottom: 0; 
 }
 
 .nav-links a {
@@ -300,7 +300,7 @@ header h1 {
     box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 
-.btn-hero { /* Specific to hero button */
+.btn-hero { 
     padding: 16px 35px;
     font-size: 1.15rem;
 }
@@ -423,12 +423,12 @@ header h1 {
     font-weight: 300;
 }
 
-/* --- About Us Page Specific Styles (can be moved to about.css if it grows) --- */
-.about-content {
+/* --- About Us Page Specific Styles --- */
+.about-content { /* Wrapper for all content on about.html besides page title */
     font-size: 1.08rem;
     line-height: 1.85;
 }
-.about-content h3, .about-content h2, .about-content h4 {
+.about-content h3, .about-content h2, .about-content h4 { /* Headings within about.html */
     font-family: var(--font-primary);
 }
 
@@ -441,7 +441,7 @@ header h1 {
     border: 1px solid var(--border-color);
 }
 
-.about-section h3 { /* Titles within each about box */
+.about-section h3 { /* Titles within each .about-section box */
     color: var(--primary-color);
     font-size: 1.9rem;
     margin-bottom: 20px;
@@ -450,14 +450,14 @@ header h1 {
     display: inline-block;
 }
 
-.about-section .profile-image-container {
+.about-section .profile-image-container { /* For Principal's section */
     display: grid;
     grid-template-columns: auto 1fr;
     gap: 30px;
     align-items: flex-start;
 }
 
-.about-section .profile-img {
+.about-section .profile-img { /* Principal's image */
     width: 200px;
     height: 200px;
     object-fit: cover;
@@ -469,17 +469,19 @@ header h1 {
     margin-top: 0;
 }
 
-/* Styles for lists that appear within .about-section OR .facilities-list-container */
-/* This is general enough to stay or be moved to a specific about.css / facilities.css */
-.about-section ul,
-.facilities-list-container ul {
+/* --- Facilities Section (Homepage) and Lists on About Page --- */
+/* Common styles for the <ul> within these containers */
+.about-section ul,  /* For lists on about.html */
+.facilities-section .facilities-grid ~ .about-section ul, /* If you ever put a list styled like this after the grid */
+.facilities-section .facilities-list-container ul /* If using a dedicated list container */ {
     list-style: none;
     padding-left: 0;
     columns: 2;
     gap: 25px;
 }
 .about-section ul li,
-.facilities-list-container ul li {
+.facilities-section .facilities-grid ~ .about-section ul li,
+.facilities-section .facilities-list-container ul li {
     margin-bottom: 14px;
     padding-left: 30px;
     position: relative;
@@ -488,7 +490,8 @@ header h1 {
     break-inside: avoid-column;
 }
 .about-section ul li::before,
-.facilities-list-container ul li::before {
+.facilities-section .facilities-grid ~ .about-section ul li::before,
+.facilities-section .facilities-list-container ul li::before {
     content: "\f058";
     font-family: "Font Awesome 6 Free";
     font-weight: 900;
@@ -498,27 +501,76 @@ header h1 {
     color: var(--accent-color);
     font-size: 1.2em;
 }
-.facilities-list-container { /* For the one on index.html */
-    background-color: transparent;
-    box-shadow: none;
-    border: none;
-    padding: 0;
-    margin-top: 20px;
+
+/* Specific styles for the new grid-based Facilities Section on Homepage */
+.facilities-section {
+    /* Uses .section-padding and .bg-light */
+}
+.facilities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 25px;
+}
+.facility-item {
+    background-color: var(--bg-color);
+    padding: 25px 20px;
+    border-radius: var(--border-radius-md);
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.facility-item:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+.facility-item i {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 18px;
+    padding: 15px;
+    background-color: var(--neutral-bg-color);
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    line-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+.facility-item:hover i {
+    background-color: var(--primary-color);
+    color: var(--light-text-color);
+}
+.facility-item h4 {
+    font-size: 1.25rem;
+    color: var(--heading-color);
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+.facility-item p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--text-color);
+    flex-grow: 1;
+    margin-bottom: 0;
 }
 
 
 /* --- Contact Us Section (About Page) --- */
 .contact-us-section {
-    /* Styles primarily from .section-padding and .bg-neutral */
+    /* General styling from .section-padding and .bg-neutral */
 }
-
 .contact-grid {
     display: grid;
     grid-template-columns: 1fr 1.5fr;
     gap: 40px;
     align-items: flex-start;
 }
-
 .contact-details h3,
 .map-container h3 {
     font-size: 1.8rem;
@@ -527,7 +579,6 @@ header h1 {
     position: relative;
     padding-bottom: 10px;
 }
-
 .contact-details h3::after,
 .map-container h3::after {
     content: '';
@@ -538,7 +589,6 @@ header h1 {
     height: 3px;
     background-color: var(--secondary-color);
 }
-
 .contact-details p {
     font-size: 1.05rem;
     margin-bottom: 15px;
@@ -546,7 +596,6 @@ header h1 {
     display: flex;
     align-items: flex-start;
 }
-
 .contact-details p i {
     color: var(--primary-color);
     margin-right: 12px;
@@ -561,7 +610,6 @@ header h1 {
     margin-top: 25px;
     margin-bottom: 10px;
 }
-
 .map-container iframe {
     border-radius: var(--border-radius-md);
     box-shadow: var(--card-shadow);
@@ -569,8 +617,7 @@ header h1 {
 }
 
 /* --- Educators Page --- */
-/* .highlight-item-link remains for educators page link on index.html */
-.highlight-item-link {
+.highlight-item-link { /* Link wrapper for cards like educators on index.html */
     text-decoration: none;
     color: inherit;
     display: block;
@@ -653,6 +700,19 @@ header h1 {
     margin-top: 10px;
 }
 
+/* General placeholder/loading text if needed globally */
+.placeholder-text, 
+.loading-text {
+    text-align: center;
+    font-style: italic;
+    color: #777;
+    padding: 20px;
+    border-radius: var(--border-radius-md);
+}
+.loading-text {
+    font-weight: 500;
+}
+
 
 /* --- Footer --- */
 footer {
@@ -700,7 +760,8 @@ footer p {
     .contact-details h3, .map-container h3 { font-size: 1.6rem; }
     .about-section .profile-image-container { grid-template-columns: 1fr; text-align: center;}
     .about-section .profile-img { margin: 0 auto 20px auto; }
-    .about-section ul, .facilities-list-container ul { columns: 1; }
+    .about-section ul, .facilities-section .facilities-grid ~ .about-section ul, .facilities-section .facilities-list-container ul { columns: 1; }
+    .facilities-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
 }
 
 @media (max-width: 768px) {
@@ -749,6 +810,9 @@ footer p {
     .educator-name { font-size: 1.3rem; }
     .about-section h3 { font-size: 1.7rem; }
     .contact-details p i { font-size: 1.1rem; }
+
+    .facility-item i { font-size: 2.2rem; width: 60px; height: 60px; line-height: 30px; }
+    .facility-item h4 { font-size: 1.15rem; }
 }
 
 @media (max-width: 480px) {
@@ -765,4 +829,5 @@ footer p {
 
     .btn { padding: 12px 25px; font-size: 0.95rem; }
     .educators-grid { grid-template-columns: 1fr; }
+    .facilities-grid { grid-template-columns: 1fr; }
 }
