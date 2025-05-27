@@ -1,46 +1,71 @@
 // js/script.js
+
 document.addEventListener('DOMContentLoaded', () => {
     const currentPath = window.location.pathname.split("/").pop() || 'index.html';
 
     // --- Common Functionality ---
-    const navToggle = document.querySelector('.nav-toggle');
-    const navLinks = document.querySelector('.nav-links');
-    if (navToggle && navLinks) {
+
+    // Desktop Navigation Toggle (Hamburger Menu)
+    const navToggle = document.querySelector('header .nav-toggle'); // More specific selector for desktop
+    const desktopNavLinks = document.querySelector('header .nav-links');
+    if (navToggle && desktopNavLinks) {
         navToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            navToggle.classList.toggle('active');
-            document.body.classList.toggle('nav-open'); // Optional: for styling body when nav is open
+            desktopNavLinks.classList.toggle('active');
+            navToggle.classList.toggle('active'); // For hamburger X animation
+            // Optional: Toggle a class on body if you need to prevent scroll when mobile menu is open
+            // document.body.classList.toggle('nav-open'); 
         });
     }
 
+    // Active Link Highlighting for both Desktop and Mobile Navigations
     const setActiveLink = () => {
-        const links = document.querySelectorAll('.nav-links a');
-        links.forEach(link => {
+        // For Desktop Navigation
+        const desktopLinks = document.querySelectorAll('header .nav-links a');
+        desktopLinks.forEach(link => {
             link.classList.remove('active');
             let linkHref = link.getAttribute('href').split("/").pop();
             
-            // Handle index.html being the root path, or direct access to index.html
+            // Handle root path correctly for index.html
             if (currentPath === 'index.html' && (linkHref === '' || linkHref === 'index.html')) {
                 link.classList.add('active');
-            } else if (linkHref === currentPath) { // For other pages
+            } else if (linkHref === currentPath && linkHref !== '') { // Check if not empty for other pages
+                link.classList.add('active');
+            }
+        });
+
+        // For Mobile Bottom Navigation
+        const mobileLinks = document.querySelectorAll('.mobile-bottom-nav a.mobile-nav-link');
+        mobileLinks.forEach(link => {
+            link.classList.remove('active');
+            let linkHref = link.getAttribute('href').split("/").pop();
+
+            if (currentPath === 'index.html' && (linkHref === '' || linkHref === 'index.html')) {
+                link.classList.add('active');
+            } else if (linkHref === currentPath && linkHref !== '') {
                 link.classList.add('active');
             }
         });
     };
-    setActiveLink();
+    setActiveLink(); // Call the function to highlight the active link on page load
 
+    // Footer Current Year
     const currentYearSpan = document.getElementById('currentYear');
     if (currentYearSpan) {
         currentYearSpan.textContent = new Date().getFullYear();
     }
 
-    // --- Page Specific Initializations (other than notice, results, gallery) ---
+    // --- Page Specific Initializations (for pages without their own dedicated JS file yet) ---
+    // This section can be used to run small, unique JS snippets for specific pages
+    // if they don't warrant a full separate JS file.
+
     if (currentPath === 'educators.html') { 
-        // console.log("Educators page loaded. Any specific JS for this page can go here.");
+        // Example: console.log("Educators page specific JavaScript can run here.");
+        // If educators.html eventually needs complex JS, create educators.js
     } else if (currentPath === 'about.html') {
-        // console.log("About Us page loaded. Any specific JS for this page can go here.");
+        // Example: console.log("About Us page specific JavaScript can run here.");
     } else if (currentPath === 'index.html') {
-        // console.log("Homepage loaded. Any specific JS for this page can go here.");
+        // Example: console.log("Homepage specific JavaScript (if any) can run here.");
     }
 
 });
+

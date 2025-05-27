@@ -1,0 +1,73 @@
+/* css/mobile-nav.css */
+
+.mobile-bottom-nav {
+    display: none; /* Hidden by default, shown via media query */
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--primary-color, #0A4D68); /* Use existing primary color */
+    color: var(--light-text-color, #fdfdfd);
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.15);
+    z-index: 999; /* Below header but above most content */
+    border-top: 1px solid var(--primary-color-dark, #083D53);
+}
+
+.mobile-bottom-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 60px; /* Adjust height as needed */
+}
+
+.mobile-bottom-nav li {
+    flex-grow: 1;
+    text-align: center;
+}
+
+.mobile-bottom-nav a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 5px;
+    color: rgba(255, 255, 255, 0.75); /* Slightly dimmed icon/text */
+    text-decoration: none;
+    font-size: 0.7rem; /* Small text for labels */
+    transition: color 0.2s ease, background-color 0.2s ease;
+    height: 100%;
+    border-radius: var(--border-radius-sm, 4px); /* For subtle hover/active effect */
+}
+
+.mobile-bottom-nav a i {
+    font-size: 1.4rem; /* Icon size */
+    margin-bottom: 4px;
+}
+
+.mobile-bottom-nav a:hover {
+    color: var(--light-text-color, #fdfdfd);
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.mobile-bottom-nav a.active {
+    color: var(--secondary-color, #FF7B54); /* Active color for icon and text */
+    /* background-color: rgba(255, 255, 255, 0.15); /* Subtle active background */
+}
+
+.mobile-bottom-nav a.active i {
+    /* Optional: if you want active icon to be slightly different */
+    /* transform: scale(1.1); */
+}
+
+@media (max-width: 768px) {
+    .mobile-bottom-nav {
+        display: block;
+    }
+
+    body {
+        padding-bottom: 60px; 
+    }
+}
