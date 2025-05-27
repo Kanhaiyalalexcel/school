@@ -9,7 +9,7 @@ const urlsToCache = [
     '/results.html',
     '/notice.html',
     '/educators.html',
-    '/offline.html', // Important: An offline fallback page
+    '/offline.html', 
     '/css/style.css',
     '/css/notice.css',
     '/css/results.css',
@@ -21,11 +21,8 @@ const urlsToCache = [
     '/js/gallery.js',
     '/images/logo.png',
     '/images/favicon.ico',
-    '/images/hero-bg.jpg', // Add other critical static images
-    'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css' // External resources
-    // Add paths to your app icons here if you want them cached immediately
-    // e.g., '/images/icons/icon-192x192.png',
-    // Be mindful not to cache too many large images initially
+    '/images/hero-bg.jpg', 
+    'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css' 
 ];
 
 // Install service worker and cache static assets
