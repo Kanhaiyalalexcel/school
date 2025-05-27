@@ -1,0 +1,182 @@
+/* css/notice.css */
+
+/* --- Notice Board Page & Cards --- */
+#notices-container .loading-text,
+#notices-container .placeholder-text { /* Specific to notices container */
+    text-align: center;
+    font-style: italic;
+    color: #777;
+    padding: 30px 20px;
+    border: 1px dashed var(--border-color, #dfe6e9); /* Fallback for var */
+    border-radius: var(--border-radius-md, 8px);
+    background-color: var(--light-bg-color, #f8f9fa);
+}
+
+.notice-card {
+    background-color: var(--bg-color, #fff);
+    border: 1px solid var(--border-color, #dfe6e9);
+    border-left: 5px solid var(--primary-color, #0A4D68);
+    border-radius: var(--border-radius-md, 8px);
+    padding: 20px 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.06);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    position: relative; /* For new badge positioning */
+    display: flex; /* For better structure if image is present */
+    flex-direction: column; /* Default stack */
+}
+
+.notice-card:hover {
+    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+    transform: translateY(-5px);
+}
+
+.notice-card.new-notice {
+    border-left-color: var(--secondary-color, #FF7B54);
+    background-color: #fffaf5; /* Subtle background for new notices */
+}
+
+.notice-content-wrapper {
+    display: flex;
+    gap: 20px; /* Space between image and text */
+    width: 100%;
+}
+
+.notice-image-container {
+    flex-shrink: 0; /* Prevent image container from shrinking */
+    width: 150px; /* Fixed width for notice image */
+    height: 150px; /* Fixed height for notice image */
+    overflow: hidden;
+    border-radius: var(--border-radius-sm, 4px);
+    border: 1px solid var(--border-color, #dfe6e9);
+}
+
+.notice-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0; /* Radius handled by container */
+}
+
+.notice-text-content {
+    flex-grow: 1; /* Text content takes remaining space */
+}
+
+
+.notice-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+}
+
+.notice-title {
+    font-size: 1.4rem; /* Slightly increased */
+    color: var(--primary-color, #0A4D68);
+    font-weight: 600;
+    margin-bottom: 5px; /* Space for date */
+    line-height: 1.3;
+    /* flex-grow: 1; Allow title to take space */
+}
+
+.notice-date {
+    font-size: 0.85rem;
+    color: #555; /* Darker gray for better contrast */
+    font-weight: 500;
+    padding: 4px 8px;
+    background-color: var(--neutral-bg-color, #eef2f5);
+    border-radius: var(--border-radius-sm, 4px);
+    white-space: nowrap;
+    align-self: flex-start; /* Keep it aligned with top of title if title wraps */
+    margin-left: 10px; /* Space from title if on same line */
+}
+
+
+.new-badge {
+    position: absolute;
+    top: -10px; /* Position slightly outside the card */
+    right: 15px;
+    background-color: var(--secondary-color, #FF7B54);
+    color: var(--light-text-color, #fff);
+    font-size: 0.75rem;
+    padding: 5px 12px;
+    border-radius: 15px; /* Pill shape */
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    z-index: 1; /* Ensure it's above the card */
+}
+.notice-card.new-notice .notice-title {
+    color: var(--secondary-color-dark, #e65c3a); /* Darker orange for new notice titles */
+}
+
+
+.notice-description {
+    margin-top: 8px; /* Space after header */
+    margin-bottom: 15px;
+    color: var(--text-color, #34495e);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    clear: both; /* If images were floated, though flex is used now */
+}
+
+.notice-footer { /* Optional: if you want to add read more links later */
+    margin-top: auto; /* Pushes footer to bottom if card is flex column */
+    padding-top: 10px;
+    border-top: 1px solid var(--light-bg-color, #f8f9fa);
+    text-align: right;
+}
+
+.notice-read-more {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--accent-color, #00A896);
+}
+.notice-read-more:hover {
+    text-decoration: underline;
+}
+
+/* Responsive adjustments for notices */
+@media (max-width: 768px) {
+    .notice-card {
+        padding: 15px 20px;
+    }
+    .notice-content-wrapper {
+        flex-direction: column; /* Stack image above text */
+        gap: 15px;
+    }
+    .notice-image-container {
+        width: 100%; /* Image full width */
+        height: 200px; /* Adjust height for mobile */
+        margin-bottom: 15px; /* Space below image */
+    }
+    .notice-title {
+        font-size: 1.25rem;
+    }
+    .notice-header {
+        /* flex-direction: column; // Can also stack date below title if preferred */
+        /* align-items: flex-start; */
+    }
+    .notice-date {
+        margin-left: 0;
+        margin-top: 5px; /* If title wraps and date is below */
+        align-self: flex-start; /* Ensure it stays left */
+    }
+    .new-badge {
+        font-size: 0.7rem;
+        padding: 4px 10px;
+        top: -8px;
+        right: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .notice-title {
+        font-size: 1.1rem;
+    }
+     .notice-description {
+        font-size: 0.9rem;
+    }
+}

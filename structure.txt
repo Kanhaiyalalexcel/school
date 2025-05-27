@@ -1,36 +1,50 @@
+structure.txt
+
 springfield-academy/
-├── ... (other files like index.html)
-├── data/
-│   └── gallery.json  (with the content above)
-│   └── notices.json
-│   └── results.json
-├── images/
-│   ├── logo.png
-│   ├── hero-bg.jpg
-│   ├── favicon.ico
-│   ├── gallery_placeholder_default.jpg  <-- The fallback image
-│   ├── gallery/  <-- THIS IS THE NEW SUBDIRECTORY
-│   │   ├── annual_day_1.jpg
-│   │   ├── annual_day_2.jpg
-│   │   ├── annual_day_3.jpg
-│   │   ├── campus_1.jpg
-│   │   ├── campus_2.jpg
-│   │   ├── campus_3.jpg
-│   │   ├── campus_4.jpg
-│   │   ├── graduation_1.jpg
-│   │   ├── graduation_2.jpg
-│   │   ├── sports_day_1.jpg
-│   │   ├── sports_day_2.jpg
-│   │   ├── sports_day_3.jpg
-│   │   ├── science_fair_1.jpg
-│   │   ├── science_fair_2.jpg
-│   │   ├── classroom_1.jpg
-│   │   ├── classroom_2.jpg
-│   │   ├── classroom_3.jpg
-│   │   └── ... (and any other images you use)
-│   └── notice/
-│       └── ...
+├── index.html                      # Homepage
+├── about.html                      # About Us page
+├── gallery.html                    # School Gallery page
+├── results.html                    # Examination Results page
+├── notice.html                     # Notice Board page
+├── educators.html                  # Educators/Faculty page
+│
 ├── css/
-│   └── style.css
-└── js/
-    └── script.js
+│   ├── style.css                   # Main/common styles for the website
+│   ├── notice.css                  # Styles specific to the Notice Board page/section
+│   ├── results.css                 # Styles specific to the Results page/section
+│   └── gallery.css                 # Styles specific to the Gallery page/section
+│
+├── js/
+│   ├── script.js                   # Main/common JavaScript functionalities
+│   ├── notice.js                   # JavaScript for Notice Board functionality
+│   ├── results.js                  # JavaScript for Results page functionality
+│   └── gallery.js                  # JavaScript for Gallery page functionality
+│
+├── data/
+│   ├── notices.json                # Data for notices
+│   ├── results.json                # Data for student results
+│   └── gallery.json                # Data for gallery albums and images
+│
+└── images/
+    ├── logo.png                    # School logo
+    ├── favicon.ico                 # Website favicon
+    ├── hero-bg.jpg                 # Background image for the homepage hero section
+    ├── principal.jpg               # Image of the principal (for About Us page)
+    │
+    ├── gallery/                    # Subfolder for gallery images
+    │   ├── 1.jpg                   # Example gallery image
+    │   ├── 2.jpg                   # Example gallery image
+    │   ├── ... (other image files as defined in gallery.json)
+    │
+    ├── notice/                     # Subfolder for notice-related images
+    │   ├── exam_schedule.jpg       # Example notice image
+    │   ├── sports_day_postponed.jpg # Example notice image
+    │   └── science_exhibition.jpg  # Example notice image
+    │   └── ... (other notice images as defined in notices.json)
+    │
+    ├── educators/                  # Subfolder for educator/faculty photos
+    │   ├── placeholder_male.png    # Example placeholder
+    │   ├── placeholder_female.png  # Example placeholder
+    │   ├── ... (actual educator photos)
+    │
+    └── gallery_placeholder_default.jpg # Fallback image if an album has no images

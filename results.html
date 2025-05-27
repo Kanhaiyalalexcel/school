@@ -6,6 +6,7 @@
     <title>Results - Springfield Academy</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/results.css"> <!-- ADDED THIS LINE -->
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
 </head>
 <body>
@@ -56,8 +57,7 @@
                     <button id="view-results-btn" class="btn btn-primary" disabled>View Results</button>
                 </div>
 
-                <div id="results-table-container" class="table-responsive">
-                    <!-- Results table will be rendered here by JS -->
+                <div id="results-table-container" class="table-responsive"> <!-- Added table-responsive here -->
                     <p class="placeholder-text">Please select a class and test to view results.</p>
                 </div>
             </div>
@@ -66,15 +66,16 @@
 
     <footer>
         <div class="container">
-            <p>© <span id="currentYear"></span> Springfield Academy. All Rights Reserved.</p>
+            <p>© <span id="currentYear"></span> Springfield Academy. Excellence in Education. All Rights Reserved.</p>
             <div class="social-links">
-                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="Facebook" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Twitter" title="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="Instagram" title="Instagram"><i class="fab fa-instagram"></i></a>
             </div>
         </div>
     </footer>
 
     <script src="js/script.js"></script>
+    <script src="js/results.js" defer></script> <!-- ADDED THIS LINE -->
 </body>
 </html>

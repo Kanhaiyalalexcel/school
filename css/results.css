@@ -1,0 +1,158 @@
+/* css/results.css */
+
+/* --- Results Page --- */
+.results-filter {
+    background-color: var(--bg-color, #fff); /* Cleaner look */
+    padding: 25px;
+    border-radius: var(--border-radius-lg, 12px);
+    margin-bottom: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px; /* Increased gap */
+    align-items: flex-end;
+    box-shadow: var(--card-shadow, 0 5px 15px rgba(0, 0, 0, 0.08));
+    border: 1px solid var(--border-color, #dfe6e9);
+}
+
+.results-filter .form-group { /* Ensure form-group is specifically within results-filter for this styling */
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    min-width: 220px;
+}
+
+.results-filter .form-group label {
+    margin-bottom: 8px; /* More space */
+    font-weight: 600; /* Bolder label */
+    color: var(--primary-color, #0A4D68);
+    font-size: 0.95rem;
+}
+
+.results-filter .form-control { /* Ensure form-control is specifically within results-filter */
+    padding: 12px 15px; /* More padding */
+    border: 1px solid var(--border-color, #dfe6e9);
+    border-radius: var(--border-radius-md, 8px);
+    font-size: 1rem;
+    width: 100%;
+    background-color: var(--bg-color, #fff);
+    transition: border-color var(--transition-speed, 0.3s) ease, box-shadow var(--transition-speed, 0.3s) ease;
+}
+.results-filter .form-control:focus {
+    border-color: var(--primary-color, #0A4D68);
+    box-shadow: 0 0 0 0.2rem rgba(10, 77, 104, 0.25); /* Focus ring */
+    outline: none;
+}
+
+.results-filter .btn { /* Styles for button specifically within the filter */
+    align-self: flex-end;
+    padding: 12px 25px;
+}
+
+/* Styles for results table container, placeholder text and loading text within it */
+#results-table-container .placeholder-text,
+#results-table-container .loading-text,
+#results-table-container .error-text {
+    text-align: center;
+    font-style: italic;
+    color: #777;
+    padding: 30px 20px;
+    border: 1px dashed var(--border-color, #dfe6e9);
+    border-radius: var(--border-radius-md, 8px);
+    background-color: var(--light-bg-color, #f8f9fa);
+    width: 100%;
+}
+#results-table-container .error-text {
+    color: var(--secondary-color, #FF7B54); /* Make error text more prominent */
+    border-color: var(--secondary-color, #FF7B54);
+}
+
+
+.table-responsive { /* This class is typically for the wrapper around the table */
+    overflow-x: auto;
+    margin-top: 30px;
+    border-radius: var(--border-radius-md, 8px);
+    box-shadow: var(--card-shadow, 0 5px 15px rgba(0, 0, 0, 0.08));
+    border: 1px solid var(--border-color, #dfe6e9);
+}
+
+.results-table { /* Specific table for results */
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.results-table th,
+.results-table td {
+    border-bottom: 1px solid var(--border-color, #dfe6e9);
+    padding: 15px 18px;
+    text-align: left;
+    font-size: 0.95rem;
+    vertical-align: middle; /* Good for table cell content */
+}
+.results-table td:first-child, .results-table th:first-child { border-left: none; }
+.results-table td:last-child, .results-table th:last-child { border-right: none; }
+
+
+.results-table thead {
+    background-color: var(--primary-color-dark, #083D53);
+    color: var(--light-text-color, #fdfdfd);
+}
+.results-table thead th {
+    border-bottom-width: 2px;
+    border-bottom-color: var(--primary-color, #0A4D68);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.85rem;
+    color: var(--light-text-color, #fdfdfd) !important; /* Ensure visibility */
+}
+
+.results-table tbody tr:nth-child(even) {
+    background-color: var(--light-bg-color, #f8f9fa);
+}
+
+.results-table tbody tr:hover {
+    background-color: #e9ecef;
+}
+
+.results-table .rank-col { 
+    text-align: center; 
+    font-weight: 600; 
+    color: var(--accent-color, #00A896); 
+    width: 8%; /* Give rank a bit of fixed width */
+}
+.results-table .percentage-col { 
+    font-weight: bold; 
+    color: var(--primary-color, #0A4D68); 
+    width: 15%; /* Give percentage some width */
+}
+.results-table .name-col { 
+    font-weight: 500; 
+}
+
+
+/* Responsive adjustments for results page */
+@media (max-width: 768px) {
+    .results-filter {
+        flex-direction: column;
+        align-items: stretch; /* Make filter items full width */
+    }
+    .results-filter .form-group {
+        width: 100%;
+    }
+    .results-filter .btn {
+        width: 100%;
+        margin-top: 15px;
+    }
+    .results-table th,
+    .results-table td {
+        padding: 12px 10px; /* Reduce padding on smaller screens */
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .results-table th,
+    .results-table td {
+        font-size: 0.85rem; /* Even smaller font for very small screens */
+    }
+}

@@ -1,3 +1,5 @@
+/* css/style.css */
+
 /* --- Google Fonts --- */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap');
@@ -5,21 +7,21 @@
 
 /* --- CSS Variables --- */
 :root {
-    --primary-color: #0A4D68; /* Deeper, sophisticated blue */
+    --primary-color: #0A4D68;
     --primary-color-dark: #083D53;
-    --secondary-color: #FF7B54; /* Vibrant, warm coral/orange */
-    --accent-color: #00A896; /* Teal for positive actions/highlights */
-    --text-color: #34495e; /* Dark grayish blue */
-    --heading-color: #2c3e50; /* Slightly darker for headings */
+    --secondary-color: #FF7B54;
+    --accent-color: #00A896;
+    --text-color: #34495e;
+    --heading-color: #2c3e50;
     --light-text-color: #fdfdfd;
     --bg-color: #ffffff;
-    --light-bg-color: #f8f9fa; /* Very light gray */
-    --neutral-bg-color: #eef2f5; /* Slightly more pronounced light background */
+    --light-bg-color: #f8f9fa;
+    --neutral-bg-color: #eef2f5;
     --border-color: #dfe6e9;
     --card-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
     --card-hover-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
     --font-primary: 'Poppins', sans-serif;
-    --font-secondary: 'Lora', serif; /* For more descriptive text or quotes if needed */
+    --font-secondary: 'Lora', serif;
     --header-height: 75px;
     --border-radius-sm: 4px;
     --border-radius-md: 8px;
@@ -53,7 +55,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 { font-size: 2.8rem; letter-spacing: -0.5px; }
-h2 { font-size: 2.2rem; }
+h2 { font-size: 2.2rem; } /* General h2, can be overridden by .section-title */
 h3 { font-size: 1.6rem; }
 h4 { font-size: 1.2rem; }
 
@@ -80,9 +82,15 @@ img {
     border-radius: var(--border-radius-sm);
 }
 
-ul {
-    list-style: none;
+ul { /* General ul styling, can be overridden */
+    list-style: disc; /* Default list style, page-specific CSS can change this */
+    padding-left: 20px;
+    margin-bottom: 1rem;
 }
+ul li {
+    margin-bottom: 0.5rem;
+}
+
 
 .container {
     max-width: 1140px;
@@ -105,7 +113,7 @@ ul {
     text-align: center;
 }
 
-.section-title {
+.section-title { /* For main section titles */
     text-align: center;
     margin-bottom: 60px;
     color: var(--primary-color);
@@ -173,10 +181,14 @@ header h1 {
 
 .nav-links {
     display: flex;
+    list-style: none; /* Override general ul for nav */
+    padding-left: 0;   /* Override general ul for nav */
+    margin-bottom: 0;  /* Override general ul for nav */
 }
 
 .nav-links li {
     margin-left: 30px;
+    margin-bottom: 0; /* Override general li for nav */
 }
 
 .nav-links a {
@@ -288,7 +300,7 @@ header h1 {
     box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 
-.btn-hero {
+.btn-hero { /* Specific to hero button */
     padding: 16px 35px;
     font-size: 1.15rem;
 }
@@ -350,6 +362,7 @@ header h1 {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 30px;
     margin-top: 30px;
+    align-items: stretch;
 }
 
 .highlight-item {
@@ -358,13 +371,15 @@ header h1 {
     text-align: center;
     border-radius: var(--border-radius-lg);
     box-shadow: var(--card-shadow);
-    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
     border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
-.highlight-item:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--card-hover-shadow);
+.highlight-item p {
+    flex-grow: 1;
+    margin-bottom: 0; 
 }
 
 .highlight-icon-wrapper {
@@ -379,16 +394,14 @@ header h1 {
     margin: 0 auto 20px auto;
     font-size: 2rem;
     box-shadow: 0 3px 8px rgba(0, 168, 150, 0.3);
+    flex-shrink: 0;
 }
 
 .highlight-item h3 {
     color: var(--primary-color);
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     font-size: 1.4rem;
-}
-.highlight-item p {
-    font-size: 0.95rem;
-    line-height: 1.6;
+    flex-shrink: 0;
 }
 
 /* --- Page Title Section (for internal pages) --- */
@@ -410,436 +423,100 @@ header h1 {
     font-weight: 300;
 }
 
-/* --- Notice Board Page & Cards --- */
-#notices-container .loading-text,
-.placeholder-text, /* General placeholder */
-#image-gallery-container .loading-text, /* Gallery loading */
-#image-gallery-container .placeholder-text /* Gallery placeholder */
-{
-    text-align: center;
-    font-style: italic;
-    color: #777;
-    padding: 30px 20px;
-    border: 1px dashed var(--border-color);
-    border-radius: var(--border-radius-md);
-    background-color: var(--light-bg-color);
-    width: 100%; /* Ensure it spans if container is flex/grid */
-}
-
-.notice-card {
-    background-color: var(--bg-color);
-    border: 1px solid var(--border-color);
-    border-left: 6px solid var(--primary-color);
-    border-radius: var(--border-radius-md);
-    padding: 25px;
-    margin-bottom: 25px;
-    box-shadow: var(--card-shadow);
-    transition: box-shadow var(--transition-speed) ease, transform var(--transition-speed) ease;
-    position: relative;
-}
-
-.notice-card:hover {
-    box-shadow: var(--card-hover-shadow);
-    transform: translateY(-5px);
-}
-
-.notice-card.new-notice {
-    border-left-color: var(--secondary-color);
-}
-
-.notice-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 12px;
-    flex-wrap: wrap;
-}
-
-.notice-title {
-    font-size: 1.5rem;
-    color: var(--primary-color);
-    margin-bottom: 5px;
-    font-weight: 600;
-    flex-basis: 70%;
-}
-
-.notice-date {
-    font-size: 0.9rem;
-    color: #6c757d;
-    font-weight: 500;
-    margin-top: 4px;
-    white-space: nowrap;
-}
-
-.new-badge {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    background-color: var(--secondary-color);
-    color: white;
-    font-size: 0.8rem;
-    padding: 5px 10px;
-    border-radius: var(--border-radius-sm);
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.notice-description {
-    margin-bottom: 15px;
-    color: var(--text-color);
-    font-size: 1rem;
-    line-height: 1.7;
-}
-
-.notice-image {
-    max-width: 100%;
-    height: auto;
-    border-radius: var(--border-radius-sm);
-    margin-top: 20px;
-    border: 1px solid var(--border-color);
-}
-
-/* --- Results Page --- */
-.results-filter {
-    background-color: var(--bg-color);
-    padding: 25px;
-    border-radius: var(--border-radius-lg);
-    margin-bottom: 40px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 25px;
-    align-items: flex-end;
-    box-shadow: var(--card-shadow);
-    border: 1px solid var(--border-color);
-}
-
-.form-group {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    min-width: 220px;
-}
-
-.form-group label {
-    margin-bottom: 8px;
-    font-weight: 600;
-    color: var(--primary-color);
-    font-size: 0.95rem;
-}
-
-.form-control {
-    padding: 12px 15px;
-    border: 1px solid var(--border-color);
-    border-radius: var(--border-radius-md);
-    font-size: 1rem;
-    width: 100%;
-    background-color: var(--bg-color);
-    transition: border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
-}
-.form-control:focus {
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 0.2rem rgba(10, 77, 104, 0.25);
-    outline: none;
-}
-
-.results-filter .btn {
-    align-self: flex-end;
-    padding: 12px 25px;
-}
-
-.table-responsive {
-    overflow-x: auto;
-    margin-top: 30px;
-    border-radius: var(--border-radius-md);
-    box-shadow: var(--card-shadow);
-    border: 1px solid var(--border-color);
-}
-
-.results-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.results-table th,
-.results-table td {
-    border-bottom: 1px solid var(--border-color);
-    padding: 15px 18px;
-    text-align: left;
-    font-size: 0.95rem;
-}
-.results-table td:first-child, .results-table th:first-child { border-left: none; }
-.results-table td:last-child, .results-table th:last-child { border-right: none; }
-
-
-.results-table thead {
-    background-color: var(--primary-color-dark);
-    color: var(--light-text-color);
-}
-.results-table thead th {
-    border-bottom-width: 2px;
-    border-bottom-color: var(--primary-color);
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    font-size: 0.85rem;
-}
-
-.results-table tbody tr:nth-child(even) {
-    background-color: var(--light-bg-color);
-}
-
-.results-table tbody tr:hover {
-    background-color: #e9ecef;
-}
-
-.results-table .rank-col { text-align: center; font-weight: 600; color: var(--accent-color); }
-.results-table .percentage-col { font-weight: bold; color: var(--primary-color); }
-.results-table .name-col { font-weight: 500; }
-
-
-/* --- Gallery Page --- */
-.gallery-grid .container {
-    max-width: 1200px;
-}
-.image-gallery { /* This is the container for gallery-items */
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 25px; /* Increased gap */
-}
-
-.gallery-item {
-    background-color: var(--bg-color); /* Add a background if caption is outside image */
-    border-radius: var(--border-radius-lg);
-    box-shadow: var(--card-shadow);
-    cursor: pointer;
-    overflow: hidden; /* Important if caption is part of this item but image has own radius */
-    display: flex; /* For aligning image and caption if caption is below */
-    flex-direction: column;
-    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
-    opacity: 0; /* For scroll animation */
-    transform: translateY(30px); /* For scroll animation */
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out, box-shadow var(--transition-speed) ease;
-}
-.gallery-item.is-visible { /* For scroll animation */
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.gallery-item:hover {
-    transform: scale(1.03); /* Keep overall item hover effect */
-    box-shadow: var(--card-hover-shadow);
-}
-
-.gallery-item img {
-    width: 100%;
-    height: 250px; /* Adjust as needed */
-    object-fit: cover;
-    /* Remove border-radius from img if gallery-item has overflow:hidden and its own radius */
-    /* border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0; if caption below */
-    transition: transform 0.4s ease;
-}
-
-.gallery-item:hover img {
-    /* Optional: if you want image to zoom slightly more than card, but can be tricky with caption */
-    /* transform: scale(1.05); */
-}
-
-.gallery-item-caption {
-    padding: 15px;
-    text-align: center; /* Or left, as preferred */
-    background-color: var(--bg-color); /* Or a slightly different shade */
-    color: var(--heading-color);
-    font-weight: 500;
-    font-size: 1rem;
-    border-top: 1px solid var(--border-color); /* If caption is below image */
-    /* No opacity or transform changes needed, it's always visible */
-}
-
-
-/* Lightbox styles */
-.lightbox {
-    display: none;
-    position: fixed;
-    z-index: 1001;
-    /* remove padding-top: 50px; */
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden; /* Prevent scrollbars on lightbox itself */
-    background-color: rgba(0,0,0,0.93);
-    align-items: center;
-    justify-content: center;
-    padding: 20px; /* Add some padding around the content area */
-}
-
-.lightbox-image-container {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%; /* Take full width of padded lightbox area */
-    height: 100%; /* Take full height of padded lightbox area */
-}
-
-.lightbox-content { /* This is the <img> tag */
-    display: block;
-    max-width: 100%; /* Max width of its container */
-    max-height: 100%; /* Max height of its container */
-    object-fit: contain; /* Crucial to see the whole image and maintain aspect ratio */
-    animation-name: zoomInLightbox;
-    animation-duration: 0.5s;
-    border-radius: var(--border-radius-sm); /* Optional: slight radius on image */
-    box-shadow: 0 0 25px rgba(0,0,0,0.5); /* Optional: subtle shadow around image */
-}
-
-@keyframes zoomInLightbox {
-    from {transform:scale(0.8); opacity: 0;}
-    to {transform:scale(1); opacity: 1;}
-}
-
-.close-lightbox {
-    position: absolute;
-    top: 20px;
-    right: 25px;
-    color: #f1f1f1;
-    font-size: 35px; /* Adjusted */
-    font-weight: bold;
-    transition: 0.3s;
-    cursor: pointer;
-    line-height: 1;
-    z-index: 1003; /* Above nav buttons */
-}
-
-.close-lightbox:hover,
-.close-lightbox:focus { color: #bbb; }
-
-.lightbox-nav {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(20, 20, 20, 0.6); /* Slightly lighter */
-    color: white;
-    border: none;
-    font-size: 2.2rem; /* Adjusted */
-    padding: 12px 18px; /* Adjusted */
-    cursor: pointer;
-    z-index: 1002;
-    border-radius: var(--border-radius-md);
-    transition: background-color 0.2s ease;
-    user-select: none;
-}
-
-.lightbox-nav:hover {
-    background-color: rgba(0, 0, 0, 0.8);
-}
-
-.lightbox-nav.prev {
-    left: 20px; /* Adjusted for overall padding */
-}
-
-.lightbox-nav.next {
-    right: 20px; /* Adjusted for overall padding */
-}
-
-.lightbox-nav.disabled {
-    opacity: 0.4;
-    cursor: default;
-    pointer-events: none; /* Make it truly unclickable */
-}
-
-#lightbox-caption {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: auto;
-    max-width: 70%; /* Max width of caption */
-    text-align: center;
-    color: #eee;
-    background-color: rgba(0,0,0,0.75);
-    padding: 10px 18px;
-    border-radius: var(--border-radius-sm);
-    font-size: 1rem;
-    z-index: 1002;
-}
-#lightbox-counter {
-    position: absolute;
-    top: 25px;
-    left: 50%;
-    transform: translateX(-50%);
-    color: #ddd;
-    background-color: rgba(0,0,0,0.75);
-    padding: 6px 12px;
-    border-radius: var(--border-radius-sm);
-    font-size: 0.9rem;
-    z-index: 1002;
-}
-
-
-/* --- About Us Page --- */
+/* --- About Us Page Specific Styles (can be moved to about.css if it grows) --- */
 .about-content {
-    font-family: var(--font-secondary);
-    font-size: 1.1rem;
-    line-height: 1.8;
+    font-size: 1.08rem;
+    line-height: 1.85;
 }
 .about-content h3, .about-content h2, .about-content h4 {
     font-family: var(--font-primary);
 }
 
-.about-section {
-    margin-bottom: 40px;
+.about-section { /* Styles for Mission, Vision, Principal, History cards on about.html */
+    margin-bottom: 50px;
+    padding: 30px;
+    background-color: var(--bg-color);
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+    border: 1px solid var(--border-color);
 }
-.about-section h3 {
+
+.about-section h3 { /* Titles within each about box */
     color: var(--primary-color);
-    font-size: 1.8rem;
-    margin-bottom: 15px;
+    font-size: 1.9rem;
+    margin-bottom: 20px;
     border-bottom: 3px solid var(--secondary-color);
-    padding-bottom: 8px;
+    padding-bottom: 10px;
     display: inline-block;
 }
+
+.about-section .profile-image-container {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 30px;
+    align-items: flex-start;
+}
+
 .about-section .profile-img {
-    float: left;
-    width: 180px;
-    height: 180px;
+    width: 200px;
+    height: 200px;
     object-fit: cover;
     border-radius: 50%;
-    margin-right: 25px;
-    margin-bottom: 15px;
-    border: 4px solid var(--border-color);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    border: 5px solid var(--light-bg-color);
+    box-shadow: var(--card-shadow);
 }
-.about-section ul {
+.profile-text p:first-of-type {
+    margin-top: 0;
+}
+
+/* Styles for lists that appear within .about-section OR .facilities-list-container */
+/* This is general enough to stay or be moved to a specific about.css / facilities.css */
+.about-section ul,
+.facilities-list-container ul {
     list-style: none;
     padding-left: 0;
+    columns: 2;
+    gap: 25px;
 }
-.about-section ul li {
-    margin-bottom: 12px;
-    padding-left: 25px;
+.about-section ul li,
+.facilities-list-container ul li {
+    margin-bottom: 14px;
+    padding-left: 30px;
     position: relative;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    break-inside: avoid-column;
 }
-.about-section ul li::before {
-    content: "\f00c";
+.about-section ul li::before,
+.facilities-list-container ul li::before {
+    content: "\f058";
     font-family: "Font Awesome 6 Free";
     font-weight: 900;
     position: absolute;
     left: 0;
-    top: 1px;
+    top: 3px;
     color: var(--accent-color);
-    font-size: 0.9em;
+    font-size: 1.2em;
 }
+.facilities-list-container { /* For the one on index.html */
+    background-color: transparent;
+    box-shadow: none;
+    border: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+
 /* --- Contact Us Section (About Page) --- */
 .contact-us-section {
-    /* Uses .section-padding and .bg-neutral already defined */
+    /* Styles primarily from .section-padding and .bg-neutral */
 }
 
 .contact-grid {
     display: grid;
-    grid-template-columns: 1fr 1.5fr; /* Details take less space than map */
+    grid-template-columns: 1fr 1.5fr;
     gap: 40px;
-    align-items: flex-start; /* Align items to the top of their grid cell */
+    align-items: flex-start;
 }
 
 .contact-details h3,
@@ -866,17 +543,17 @@ header h1 {
     font-size: 1.05rem;
     margin-bottom: 15px;
     line-height: 1.8;
-    display: flex; /* For icon alignment */
-    align-items: flex-start; /* Align icon with first line of text */
+    display: flex;
+    align-items: flex-start;
 }
 
 .contact-details p i {
     color: var(--primary-color);
     margin-right: 12px;
     font-size: 1.2rem;
-    width: 20px; /* Fixed width for icons for consistent alignment */
+    width: 20px;
     text-align: center;
-    margin-top: 4px; /* Slight adjustment for vertical alignment */
+    margin-top: 4px;
 }
 .contact-details h4 {
     font-size: 1.2rem;
@@ -885,33 +562,97 @@ header h1 {
     margin-bottom: 10px;
 }
 
-
 .map-container iframe {
     border-radius: var(--border-radius-md);
     box-shadow: var(--card-shadow);
-    border: 1px solid var(--border-color); /* Optional border around map */
+    border: 1px solid var(--border-color);
 }
 
-/* Responsive adjustments for Contact Us Section */
-@media (max-width: 992px) {
-    .contact-grid {
-        grid-template-columns: 1fr; /* Stack on smaller screens */
-        gap: 30px;
-    }
-    .map-container {
-        margin-top: 30px; /* Add some space when stacked */
-    }
-    .contact-details h3,
-    .map-container h3 {
-        font-size: 1.6rem; /* Slightly smaller headings */
-    }
+/* --- Educators Page --- */
+/* .highlight-item-link remains for educators page link on index.html */
+.highlight-item-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    border-radius: var(--border-radius-lg);
+    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+}
+.highlight-item-link:hover .highlight-item {
+    transform: translateY(-8px);
+    box-shadow: var(--card-hover-shadow);
+}
+.highlight-item:hover { /* If not wrapped in a link */
+    transform: translateY(-8px);
+    box-shadow: var(--card-hover-shadow);
 }
 
-@media (max-width: 768px) {
-    .contact-details p i {
-        font-size: 1.1rem;
-    }
+.educators-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
 }
+.educator-card {
+    background-color: var(--bg-color);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+    border: 1px solid var(--border-color);
+}
+.educator-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--card-hover-shadow);
+}
+.educator-photo-wrapper {
+    width: 100%;
+    padding-top: 100%;
+    position: relative;
+    background-color: var(--light-bg-color);
+}
+.educator-photo-wrapper img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    border-radius: 0;
+}
+.educator-info {
+    padding: 20px 25px;
+    text-align: center;
+}
+.educator-name {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+}
+.educator-subject {
+    font-weight: 600;
+    color: var(--secondary-color);
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+.educator-degree {
+    font-size: 0.9rem;
+    color: var(--text-color);
+    margin-bottom: 15px;
+    font-style: italic;
+}
+.educator-quote {
+    font-size: 0.95rem;
+    color: #555;
+    font-family: var(--font-secondary);
+    font-style: italic;
+    line-height: 1.5;
+    padding-top: 10px;
+    border-top: 1px dashed var(--border-color);
+    margin-top: 10px;
+}
+
 
 /* --- Footer --- */
 footer {
@@ -953,8 +694,13 @@ footer p {
     .section-title { font-size: 2.2rem; }
     .page-title-section h2 { font-size: 2.4rem; }
     .highlight-item h3 { font-size: 1.3rem; }
-    .image-gallery { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); } /* Adjust for smaller screens */
-
+    .educators-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+    .contact-grid { grid-template-columns: 1fr; gap: 30px; }
+    .map-container { margin-top: 30px; }
+    .contact-details h3, .map-container h3 { font-size: 1.6rem; }
+    .about-section .profile-image-container { grid-template-columns: 1fr; text-align: center;}
+    .about-section .profile-img { margin: 0 auto 20px auto; }
+    .about-section ul, .facilities-list-container ul { columns: 1; }
 }
 
 @media (max-width: 768px) {
@@ -989,7 +735,6 @@ footer p {
     .nav-links a::after { display: none; }
     .nav-links li:last-child a { border-bottom: none; }
 
-
     .hero { min-height: 70vh; }
     .hero h2 { font-size: 2.3rem; }
     .hero p { font-size: 1.1rem; }
@@ -997,35 +742,13 @@ footer p {
 
     .highlights-grid { grid-template-columns: 1fr; gap: 25px; }
 
-    .results-filter { flex-direction: column; align-items: stretch; }
-    .results-filter .form-group { width: 100%; }
-    .results-filter .btn { width: 100%; margin-top: 15px; }
-
-    .notice-header { flex-direction: column; align-items: flex-start; }
-    .notice-title { flex-basis: 100%; margin-bottom: 5px; }
-    .notice-date { margin-top: 0; margin-bottom: 10px; }
-    .new-badge { top: 10px; right: 10px; padding: 4px 8px; font-size: 0.75rem; }
-
-    .about-section .profile-img {
-        float: none;
-        display: block;
-        margin: 0 auto 25px auto;
-        width: 150px;
-        height: 150px;
-    }
+    .about-section .profile-img { width: 150px; height: 150px; }
     .section-padding { padding: 60px 0; }
     .page-title-section { padding: 50px 0; }
-    .image-gallery { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;}
-
-
-    .lightbox-nav { font-size: 1.8rem; padding: 8px 12px; }
-    .lightbox-nav.prev { left: 10px; }
-    .lightbox-nav.next { right: 10px; }
-    #lightbox-caption { max-width: 85%; font-size: 0.9rem; padding: 8px 12px; bottom: 10px;}
-    #lightbox-counter { top: 15px; padding: 5px 10px; font-size: 0.8rem;}
-    .close-lightbox {top: 15px; right: 15px; font-size: 30px;}
-
-
+    .educators-grid { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+    .educator-name { font-size: 1.3rem; }
+    .about-section h3 { font-size: 1.7rem; }
+    .contact-details p i { font-size: 1.1rem; }
 }
 
 @media (max-width: 480px) {
@@ -1041,131 +764,5 @@ footer p {
     .hero p { font-size: 1rem; }
 
     .btn { padding: 12px 25px; font-size: 0.95rem; }
-    
-    .results-table th,
-    .results-table td { padding: 10px 12px; font-size: 0.9rem; }
-
-    .notice-title { font-size: 1.3rem; }
-    .notice-description { font-size: 0.95rem; }
-
-    .image-gallery { grid-template-columns: 1fr; gap: 20px;} /* Single column on very small screens */
-    .gallery-item img { height: 220px; }
-
-}
-/* --- Highlights Section Link Wrapper --- */
-.highlight-item-link {
-    text-decoration: none; /* Remove underline from link */
-    color: inherit; /* Inherit text color from parent */
-    display: block; /* Make the link a block to contain the card */
-    border-radius: var(--border-radius-lg); /* Match card's border radius if any */
-    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
-}
-.highlight-item-link:hover .highlight-item { /* Apply hover styles to the card inside link */
-    transform: translateY(-8px);
-    box-shadow: var(--card-hover-shadow);
-}
-/* Adjust original .highlight-item hover if it was standalone */
-.highlight-item:hover { /* If not wrapped in a link */
-    transform: translateY(-8px);
-    box-shadow: var(--card-hover-shadow);
-}
-
-
-/* --- Educators Page --- */
-.educators-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-}
-
-.educator-card {
-    background-color: var(--bg-color);
-    border-radius: var(--border-radius-lg);
-    box-shadow: var(--card-shadow);
-    overflow: hidden; /* Important for photo wrapper's border radius */
-    display: flex;
-    flex-direction: column;
-    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
-    border: 1px solid var(--border-color);
-}
-
-.educator-card:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--card-hover-shadow);
-}
-
-.educator-photo-wrapper {
-    width: 100%;
-    padding-top: 100%; /* This creates the 1:1 aspect ratio (height is 100% of width) */
-    position: relative; /* For absolute positioning of the image inside */
-    background-color: var(--light-bg-color); /* Fallback bg for image area */
-}
-
-.educator-photo-wrapper img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Cover the area, cropping if necessary */
-    object-position: center top; /* Prioritize top of image if cropped */
-    border-radius: 0; /* Image itself doesn't need radius if wrapper has overflow:hidden */
-}
-
-.educator-info {
-    padding: 20px 25px;
-    text-align: center; /* Center align text */
-}
-
-.educator-name {
-    color: var(--primary-color);
-    font-size: 1.5rem;
-    margin-bottom: 8px;
-}
-
-.educator-subject {
-    font-weight: 600;
-    color: var(--secondary-color);
-    font-size: 1rem;
-    margin-bottom: 5px;
-}
-
-.educator-degree {
-    font-size: 0.9rem;
-    color: var(--text-color);
-    margin-bottom: 15px;
-    font-style: italic;
-}
-.educator-quote {
-    font-size: 0.95rem;
-    color: #555;
-    font-family: var(--font-secondary); /* Lora for quotes */
-    font-style: italic;
-    line-height: 1.5;
-    padding-top: 10px;
-    border-top: 1px dashed var(--border-color);
-    margin-top: 10px;
-}
-
-
-/* Responsive adjustments for educators if needed */
-@media (max-width: 992px) {
-    .educators-grid {
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    }
-}
-
-@media (max-width: 768px) {
-    /* ... */
-     .educators-grid {
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); /* Further adjust for smaller screens */
-    }
-    .educator-name { font-size: 1.3rem; }
-}
-
-@media (max-width: 480px) {
-    /* ... */
-    .educators-grid {
-        grid-template-columns: 1fr; /* Single column on very small screens */
-    }
+    .educators-grid { grid-template-columns: 1fr; }
 }
