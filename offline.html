@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Springfield Academy - Offline</title>
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#0A4D68"> <!-- Same as in manifest.json -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Springfield">
+    <link rel="apple-touch-icon" href="/images/icons/icon-192x192.png">
+    <link rel="stylesheet" href="/css/style.css"> <!-- Link to your main CSS -->
+    <style>
+        body { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; text-align: center; background-color: #f4f7f6; }
+        .offline-container { padding: 20px; background-color: #fff; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1 { color: var(--primary-color); margin-bottom: 15px; }
+        p { margin-bottom: 20px; }
+        a.btn-offline { display: inline-block; padding: 10px 20px; background-color: var(--primary-color); color: white; text-decoration: none; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <div class="offline-container">
+        <img src="/images/logo.png" alt="Springfield Academy Logo" style="max-width: 100px; margin-bottom: 20px;">
+        <h1>You are Offline</h1>
+        <p>It seems you're not connected to the internet. Some content may be unavailable.</p>
+        <p>Please check your connection and try again.</p>
+        <a href="/index.html" class="btn-offline">Go to Homepage</a>
+    </div>
+</body>
+</html>
