@@ -2,19 +2,19 @@
 
 /* --- Results Page --- */
 .results-filter {
-    background-color: var(--bg-color, #fff); /* Cleaner look */
+    background-color: var(--bg-color, #fff);
     padding: 25px;
     border-radius: var(--border-radius-lg, 12px);
     margin-bottom: 40px;
     display: flex;
     flex-wrap: wrap;
-    gap: 25px; /* Increased gap */
+    gap: 25px;
     align-items: flex-end;
     box-shadow: var(--card-shadow, 0 5px 15px rgba(0, 0, 0, 0.08));
     border: 1px solid var(--border-color, #dfe6e9);
 }
 
-.results-filter .form-group { /* Ensure form-group is specifically within results-filter for this styling */
+.results-filter .form-group {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
@@ -22,14 +22,14 @@
 }
 
 .results-filter .form-group label {
-    margin-bottom: 8px; /* More space */
-    font-weight: 600; /* Bolder label */
+    margin-bottom: 8px;
+    font-weight: 600;
     color: var(--primary-color, #0A4D68);
     font-size: 0.95rem;
 }
 
-.results-filter .form-control { /* Ensure form-control is specifically within results-filter */
-    padding: 12px 15px; /* More padding */
+.results-filter .form-control {
+    padding: 12px 15px;
     border: 1px solid var(--border-color, #dfe6e9);
     border-radius: var(--border-radius-md, 8px);
     font-size: 1rem;
@@ -39,16 +39,15 @@
 }
 .results-filter .form-control:focus {
     border-color: var(--primary-color, #0A4D68);
-    box-shadow: 0 0 0 0.2rem rgba(10, 77, 104, 0.25); /* Focus ring */
+    box-shadow: 0 0 0 0.2rem rgba(10, 77, 104, 0.25);
     outline: none;
 }
 
-.results-filter .btn { /* Styles for button specifically within the filter */
+.results-filter .btn {
     align-self: flex-end;
     padding: 12px 25px;
 }
 
-/* Styles for results table container, placeholder text and loading text within it */
 #results-table-container .placeholder-text,
 #results-table-container .loading-text,
 #results-table-container .error-text {
@@ -62,22 +61,23 @@
     width: 100%;
 }
 #results-table-container .error-text {
-    color: var(--secondary-color, #FF7B54); /* Make error text more prominent */
+    color: var(--secondary-color, #FF7B54);
     border-color: var(--secondary-color, #FF7B54);
 }
 
 
-.table-responsive { /* This class is typically for the wrapper around the table */
-    overflow-x: auto;
+.table-responsive {
+    overflow: auto; /* CHANGED: to allow both horizontal and vertical scroll if needed */
     margin-top: 30px;
     border-radius: var(--border-radius-md, 8px);
     box-shadow: var(--card-shadow, 0 5px 15px rgba(0, 0, 0, 0.08));
     border: 1px solid var(--border-color, #dfe6e9);
+    max-height: 70vh; /* ADDED: Constrain height to enable internal scroll for sticky header */
 }
 
-.results-table { /* Specific table for results */
+.results-table {
     width: 100%;
-    border-collapse: collapse;
+    border-collapse: collapse; /* Keeps borders clean with sticky header */
 }
 
 .results-table th,
@@ -86,25 +86,39 @@
     padding: 15px 18px;
     text-align: left;
     font-size: 0.95rem;
-    vertical-align: middle; /* Good for table cell content */
+    vertical-align: middle;
+    border-right: 1px solid var(--border-color, #dfe6e9); /* Add right border for cell separation */
 }
-.results-table td:first-child, .results-table th:first-child { border-left: none; }
-.results-table td:last-child, .results-table th:last-child { border-right: none; }
+.results-table th:first-child,
+.results-table td:first-child {
+    border-left: none;
+}
+.results-table th:last-child,
+.results-table td:last-child {
+    border-right: none;
+}
 
 
-.results-table thead {
+.results-table thead th { /* Styles for header cells */
+    position: sticky;
+    top: 0; /* Stick to the top of the scrollable container (.table-responsive) */
     background-color: var(--primary-color-dark, #083D53);
-    color: var(--light-text-color, #fdfdfd);
-}
-.results-table thead th {
+    color: var(--light-text-color, #fdfdfd) !important;
+    z-index: 10; /* Ensure header is above scrolling content */
+    
+    /* Original header styles */
     border-bottom-width: 2px;
-    border-bottom-color: var(--primary-color, #0A4D68);
+    border-bottom-color: var(--primary-color, #0A4D68); /* Darker border below sticky header */
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     font-size: 0.85rem;
-    color: var(--light-text-color, #fdfdfd) !important; /* Ensure visibility */
 }
+/* To ensure borders are consistent, apply left border to all but first th */
+.results-table thead th:not(:first-child) {
+    border-left: 1px solid var(--primary-color, #0A4D68); /* Or a slightly lighter shade of the bg */
+}
+
 
 .results-table tbody tr:nth-child(even) {
     background-color: var(--light-bg-color, #f8f9fa);
@@ -118,12 +132,12 @@
     text-align: center; 
     font-weight: 600; 
     color: var(--accent-color, #00A896); 
-    width: 8%; /* Give rank a bit of fixed width */
+    width: 8%;
 }
 .results-table .percentage-col { 
     font-weight: bold; 
     color: var(--primary-color, #0A4D68); 
-    width: 15%; /* Give percentage some width */
+    width: 15%;
 }
 .results-table .name-col { 
     font-weight: 500; 
@@ -132,9 +146,12 @@
 
 /* Responsive adjustments for results page */
 @media (max-width: 768px) {
+    .table-responsive {
+        max-height: 65vh; /* Adjust max height for smaller viewports */
+    }
     .results-filter {
         flex-direction: column;
-        align-items: stretch; /* Make filter items full width */
+        align-items: stretch;
     }
     .results-filter .form-group {
         width: 100%;
@@ -145,7 +162,7 @@
     }
     .results-table th,
     .results-table td {
-        padding: 12px 10px; /* Reduce padding on smaller screens */
+        padding: 12px 10px;
         font-size: 0.9rem;
     }
 }
@@ -153,6 +170,10 @@
 @media (max-width: 480px) {
     .results-table th,
     .results-table td {
-        font-size: 0.85rem; /* Even smaller font for very small screens */
+        font-size: 0.85rem;
+    }
+    .results-table thead th {
+        font-size: 0.75rem; /* Smaller header font for very small screens */
+        padding: 10px 8px;
     }
 }
