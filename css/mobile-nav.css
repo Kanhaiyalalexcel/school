@@ -6,11 +6,11 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    background-color: var(--primary-color, #0A4D68); /* Use existing primary color */
+    background-color: var(--primary-color, #0A4D68);
     color: var(--light-text-color, #fdfdfd);
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.15);
-    z-index: 999; /* Below header but above most content */
-    border-top: 1px solid var(--primary-color-dark, #083D53);
+    box-shadow: 0 -3px 12px rgba(0, 0, 0, 0.18); /* Slightly more pronounced shadow */
+    z-index: 999;
+    border-top: 2px solid var(--primary-color-dark, #083D53); /* Slightly thicker top border */
 }
 
 .mobile-bottom-nav ul {
@@ -19,55 +19,103 @@
     margin: 0;
     display: flex;
     justify-content: space-around;
-    align-items: center;
-    height: 60px; /* Adjust height as needed */
+    align-items: stretch; /* Make list items stretch to fill height */
+    height: 65px; /* Slightly taller for better touch targets and visual balance */
 }
 
 .mobile-bottom-nav li {
     flex-grow: 1;
     text-align: center;
+    display: flex; /* Allow anchor to fill the li */
 }
 
 .mobile-bottom-nav a {
+    flex-grow: 1; /* Anchor takes full space of li */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 8px 5px;
-    color: rgba(255, 255, 255, 0.75); /* Slightly dimmed icon/text */
+    padding: 6px 5px; /* Adjusted padding */
+    color: rgba(255, 255, 255, 0.7); /* Dimmed for inactive state */
     text-decoration: none;
-    font-size: 0.7rem; /* Small text for labels */
-    transition: color 0.2s ease, background-color 0.2s ease;
-    height: 100%;
-    border-radius: var(--border-radius-sm, 4px); /* For subtle hover/active effect */
+    font-size: 0.75rem; /* Slightly larger label text */
+    font-weight: 500; /* Medium weight for labels */
+    transition: color 0.25s ease, background-color 0.25s ease, transform 0.15s ease-out;
+    position: relative; /* For potential active indicator */
 }
 
 .mobile-bottom-nav a i {
-    font-size: 1.4rem; /* Icon size */
-    margin-bottom: 4px;
+    font-size: 1.5rem; /* Slightly larger icons */
+    margin-bottom: 5px; /* More space between icon and text */
+    transition: transform 0.2s ease-out; /* For icon animation */
 }
 
 .mobile-bottom-nav a:hover {
-    color: var(--light-text-color, #fdfdfd);
-    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--light-text-color, #fdfdfd); /* Full white on hover */
+    background-color: rgba(255, 255, 255, 0.08); /* Very subtle hover background */
+}
+
+.mobile-bottom-nav a:active { /* Touch feedback */
+    transform: scale(0.95);
 }
 
 .mobile-bottom-nav a.active {
-    color: var(--secondary-color, #FF7B54); /* Active color for icon and text */
-    /* background-color: rgba(255, 255, 255, 0.15); /* Subtle active background */
+    color: var(--secondary-color, #FF7B54); /* Bright active color */
+    background-color: rgba(0, 0, 0, 0.1); /* Subtle dark shade for active background */
 }
+
+/* Optional: Add a small top border or dot as an active indicator */
+.mobile-bottom-nav a.active::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 24px; /* Width of the indicator */
+    height: 3px; /* Thickness of the indicator */
+    background-color: var(--secondary-color, #FF7B54);
+    border-radius: 0 0 3px 3px; /* Rounded bottom corners */
+}
+
 
 .mobile-bottom-nav a.active i {
-    /* Optional: if you want active icon to be slightly different */
-    /* transform: scale(1.1); */
+    transform: scale(1.1); /* Slightly scale up active icon */
 }
 
+/* Media Query to show mobile nav and add padding to body */
 @media (max-width: 768px) {
     .mobile-bottom-nav {
         display: block;
     }
 
     body {
-        padding-bottom: 60px; 
+        /* Match the height of the bottom nav from .mobile-bottom-nav ul */
+        padding-bottom: 65px; 
+    }
+
+    /* Optional: Hide desktop navigation elements completely on mobile */
+    /*
+    header .nav-toggle {
+        display: none; 
+    }
+    header .nav-links {
+        display: none !important; 
+    }
+    */
+}
+
+/* Further fine-tuning for very small screens if needed */
+@media (max-width: 360px) {
+    .mobile-bottom-nav ul {
+        height: 60px; /* Slightly reduce height */
+    }
+    body {
+        padding-bottom: 60px;
+    }
+    .mobile-bottom-nav a i {
+        font-size: 1.3rem;
+    }
+    .mobile-bottom-nav a {
+        font-size: 0.65rem;
     }
 }
